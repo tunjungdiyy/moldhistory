@@ -1,0 +1,51 @@
+/* Tema Utama: Industrial Blue & Neutral Gray
+Primary Blue (untuk header & tombol utama)
+#2F80ED
+
+Dark Blue (untuk sidebar atau header gelap)
+#1C2B39
+
+Light Gray (background panel atau konten)
+#F2F2F2
+
+Medium Gray (border, garis pemisah, tabel)
+#BDBDBD
+
+Accent Green (indikator sukses / stok cukup)
+#27AE60
+
+Warning Orange (peringatan / restock)
+#F2994A
+
+Danger Red (kesalahan / stok habis)
+#EB5757
+
+Basic #808080
+
+*/
+
+.body{
+    -fx-background-color: #ffffff;
+}
+
+.btn{
+    -fx-background-color: #2F80ED;
+    -fx-background-radius: 10px 10px 10px 10px;
+    -fx-border-color: 1C2B39;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-border-width: 1px;
+}
+
+.btn:hover{
+    -fx-background-color: #bdbdbd;
+    -fx-background-radius: 10px 10px 10px 10px;
+    -fx-border-color: 1C2B39;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-border-width: 1px;
+}
+
+
+.footer {
+    -fx-background-color: #1C2B39;
+}
+

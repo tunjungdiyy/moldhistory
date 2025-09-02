@@ -1,0 +1,94 @@
+
+.back{
+    -fx-background-color: #f4f6f9;
+    -fx-background-radius: 20px 20px 0px 0px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 20px 20px 0px 0px;
+    -fx-border-width: 2px;
+
+}
+
+.body {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+}
+
+.card{
+    -fx-background-color: #ebeaea;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+
+}
+
+.card:hover{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #808080;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 2);
+}
+
+.btn {
+    -fx-background-color: #a3c6f3;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #6885aa;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+}
+
+.btn:hover{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #3b4c62;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 2);
+}
+
+.navbody{
+
+    -fx-background-color: #2f4050;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 0 20px 20px 0;
+    -fx-border-width: 2px;
+    -fx-background-radius: 0 20px 20px 0 ;
+
+}
+
+.navbtn{
+    -fx-background-color: #2f4050;
+    -fx-border-color: #f4f6f9;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10px 10px 10px 10px;
+    -fx-border-radius: 10px 10px 10px 10px;
+
+}
+
+.navbtn:hover {
+    -fx-background-color: #1ab394;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10px 10px 10px 10px;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-effect: dropshadow(gaussian, #f4f6f9, 5, 0.5, 0, 1);
+}
+
+.navBack {
+    -fx-background-color: #f4f6f9;
+    -fx-border-color: #f4f6f9;
+    -fx-border-width: 1px;
+}
+
+.mainBack {
+    -fx-background-color: #f4f6f9;
+}
+
+.navText{
+    -fx-text-fill: #ffffff;
+}

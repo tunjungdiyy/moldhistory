@@ -1,0 +1,65 @@
+.decored{
+    -fx-background-color: #ffffff;
+
+}
+
+.header{
+
+    -fx-background-color: #f4f6f9;
+
+}
+
+.back{
+    -fx-background-color: #ffffff
+}
+
+.navbar{
+
+    -fx-background-color: #bdbdbd;
+    -fx-border-color: #808080;
+    -fx-border-radius: 0 20px 20px 0;
+    -fx-background-size: 2px;
+    -fx-background-radius: 0 20px 20px 0 ;
+
+}
+
+.body{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 0px 0px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 20px 20px 0px 0px;
+    -fx-border-width: 2px;
+
+}
+
+.footer{
+    -fx-background-color: #bdbdbd
+}
+
+.btndecored{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1c2b39;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+.btndecored:hover{
+    -fx-background-color: #8af382;
+    -fx-border-color: #1c2b39;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+.btnMenu{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 2px;
+}
+
+.btnMenu:hover{
+    -fx-background-color: #81e2a3;
+    -fx-border-color: #808080;
+    -fx-border-width: 2px;
+}

@@ -1,0 +1,84 @@
+.back{
+    -fx-background-color: #f4f6f9;
+    -fx-background-radius: 20px 20px 0px 0px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 20px 20px 0px 0px;
+    -fx-border-width: 2px;
+
+}
+
+.body {
+    -fx-background-color: #f4f6f9;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+}
+
+.card{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+
+}
+
+.card:hover{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 5, 0.5, 0, 2);
+}
+
+.btn {
+    -fx-background-color: #1a73e8;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #6885aa;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+}
+
+.btn:hover{
+    -fx-background-color: #5b9bd5;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #3b4c62;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #2f4050, 5, 0.5, 0, 2);
+}
+
+.form {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-border-width: 2px;
+}
+
+.text{
+    -fx-text-fill: #ffffff;
+}
+
+.textAktif{
+    -fx-text-fill: #43a047;
+}
+
+.textNon{
+    -fx-text-fill: #e53935;
+}
+
+.btnMenu{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 2px;
+}
+
+.btnMenu:hover{
+    -fx-background-color: #81e2a3;
+    -fx-border-color: #808080;
+    -fx-border-width: 2px;
+}

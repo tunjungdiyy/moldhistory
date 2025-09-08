@@ -7,10 +7,12 @@ import com.anoman.machinehistory.utility.Navigation;
 import com.anoman.machinehistory.utility.alert.AlertApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubMenuProduct {
@@ -31,10 +33,25 @@ public class SubMenuProduct {
 
     ProductService productService = new ProductServiceImpl();
 
-    public void initialize() {
-        List<ProductUpdateAndRead> list = productService.findAll();
+    List<ProductUpdateAndRead> list;
 
-        addTableData(list);
+    public void initialize() {
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                list = productService.findAll();
+                return null;
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            addTableData(list);
+        });
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
 
         tableDevision.setRowFactory(param -> {
             TableRow<ProductUpdateAndRead> row = new TableRow<>();

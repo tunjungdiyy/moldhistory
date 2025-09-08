@@ -28,10 +28,10 @@ public class ProductBuilder {
     public ProductUpdateAndRead productUpdateAndRead(ResultSet resultSet) {
         ProductUpdateAndRead productUpdateAndRead = new ProductUpdateAndRead();
         try {
-            productUpdateAndRead.setId(resultSet.getInt(id));
-            productUpdateAndRead.setName(resultSet.getString(productName));
-            productUpdateAndRead.setCodeProduct(resultSet.getString(code));
-            productUpdateAndRead.setDescription(resultSet.getString(desc));
+            productUpdateAndRead.setId(resultSet.getInt(table + "."+ id));
+            productUpdateAndRead.setName(resultSet.getString(table + "."+ productName));
+            productUpdateAndRead.setCodeProduct(resultSet.getString(table + "."+ code));
+            productUpdateAndRead.setDescription(resultSet.getString(table + "."+ desc));
 
         } catch (SQLException e) {
             log.error("faled build product : " + String.valueOf(e), getClass());

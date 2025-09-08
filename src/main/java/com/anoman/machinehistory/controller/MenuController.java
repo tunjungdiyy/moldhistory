@@ -72,6 +72,7 @@ public class MenuController {
     }
 
     public void showProcessMenu(MouseEvent mouseEvent) {
+        showContent("/com/anoman/machinehistory/transactioninput-view.fxml");
     }
 
     public void showHomeMenu(MouseEvent mouseEvent) {

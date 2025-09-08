@@ -19,12 +19,13 @@ import java.sql.SQLException;
 public class ProductMoldBuilder {
 
     ProductMoldTableName tableName = new ProductMoldTableName();
+    String table = tableName.getTableName();
     String id = tableName.getIdCol();
     String code = tableName.getCodeCol();
     String cvt = tableName.getCvtCol();
     String ct = tableName.getCtCol();
     String grammage = tableName.getGrammageCol();
-    String desc = tableName.getDescCol();
+    String desc = tableName.getDescriptionCol();
 
     ProductBuilder productBuilder = new ProductBuilder();
     MoldBuilder moldBuilder = new MoldBuilder();
@@ -33,14 +34,14 @@ public class ProductMoldBuilder {
         ProductMold productMold = new ProductMold();
 
         try {
-            productMold.setId(resultSet.getInt(id));
+            productMold.setId(resultSet.getInt(table + "." + id));
             productMold.setProduct(productBuilder.productUpdateAndRead(resultSet));
             productMold.setMold(moldBuilder.mold(resultSet));
-            productMold.setCode(resultSet.getString(code));
-            productMold.setCvt(resultSet.getInt(cvt));
-            productMold.setCt(resultSet.getDouble(ct));
-            productMold.setGrammage(resultSet.getDouble(grammage));
-            productMold.setDescription(resultSet.getString(desc));
+            productMold.setCode(resultSet.getString(table + "." + code));
+            productMold.setCvt(resultSet.getInt(table + "." + cvt));
+            productMold.setCt(resultSet.getDouble(table + "." + ct));
+            productMold.setGrammage(resultSet.getDouble(table + "." + grammage));
+            productMold.setDescription(resultSet.getString(table + "." + desc));
 
         } catch (SQLException e) {
             log.error("failed build product mold : " + String.valueOf(e), getClass());

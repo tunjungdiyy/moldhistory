@@ -168,15 +168,25 @@ public class DialogMoldController {
             Mold mold = new Mold();
             if (tfThickness.getText().isBlank()) {
                 mold.setThickness(0.0);
+            } else {
+                mold.setThickness(Double.parseDouble(tfThickness.getText()));
             }
+
             if (tfVertical.getText().isBlank()) {
                 mold.setVertical(0.0);
+            } else {
+                mold.setVertical(Double.parseDouble(tfVertical.getText()));
             }
+
             if (tfHorizontal.getText().isBlank()) {
                 mold.setHorizontal(0.0);
+            } else {
+                mold.setHorizontal(Double.parseDouble(tfHorizontal.getText()));
             }
             if (tfTonase.getText().isBlank()) {
                 mold.setTonase(0.0);
+            } else {
+                mold.setTonase(Double.parseDouble(tfTonase.getText()));
             }
 
             productMold.setMold(mold);
@@ -184,15 +194,23 @@ public class DialogMoldController {
 
             if (tfCvt.getText().isBlank()) {
                 productMold.setCvt(0);
+            } else {
+                productMold.setCvt(Integer.parseInt(tfCvt.getText()));
             }
             if (tfCt.getText().isBlank()) {
                 productMold.setCt(0.0);
+            } else {
+                productMold.setCt(Double.parseDouble(tfCt.getText()));
             }
             if (tfGrammage.getText().isBlank()) {
                 productMold.setGrammage(0.0);
+            } else {
+                productMold.setGrammage(Double.parseDouble(tfGrammage.getText()));
             }
             if (tfDescription.getText().isBlank()) {
                 productMold.setDescription("");
+            } else {
+                productMold.setDescription(tfDescription.getText());
             }
 
             productMoldService.create(productMold);

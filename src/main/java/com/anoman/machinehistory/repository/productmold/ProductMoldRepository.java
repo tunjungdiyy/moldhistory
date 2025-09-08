@@ -15,4 +15,10 @@ public interface ProductMoldRepository {
     List<ProductMold> findByCodeProduct(String codeProduct);
 
     List<ProductMold> findALl();
+
+    ProductMold findByCode(String codeKeyword);
+
+    List<ProductMold> findByProductNameContaint(String keyword);
+
+    ProductMold findById(String idFind);
 }

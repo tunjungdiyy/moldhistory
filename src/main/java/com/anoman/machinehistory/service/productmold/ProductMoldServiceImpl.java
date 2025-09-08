@@ -58,4 +58,14 @@ public class ProductMoldServiceImpl implements ProductMoldService{
     public List<ProductMold> findAll() {
         return productMoldRepository.findALl();
     }
+
+    @Override
+    public List<ProductMold> findByKeyword(String keyword) {
+        return productMoldRepository.findByProductNameContaint(keyword);
+    }
+
+    @Override
+    public ProductMold findById(String productMoldId) {
+        return productMoldRepository.findById(productMoldId);
+    }
 }

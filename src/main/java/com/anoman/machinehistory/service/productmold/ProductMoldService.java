@@ -13,4 +13,8 @@ public interface ProductMoldService {
     List<ProductMold> findbyCodeMold(String codeMold);
 
     List<ProductMold> findAll();
+
+    List<ProductMold> findByKeyword(String keyword);
+
+    ProductMold findById(String productMoldId);
 }

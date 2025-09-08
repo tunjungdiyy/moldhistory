@@ -21,7 +21,7 @@ public class ProductMoldTableName {
 
     String grammageCol = "grammage";
 
-    String descCol = "description";
+    String descriptionCol = "description";
 
 }
 

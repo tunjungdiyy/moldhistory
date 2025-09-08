@@ -32,13 +32,13 @@ public class MoldBuilder {
         Mold mold = new Mold();
 
         try {
-            mold.setId(resultSet.getInt(id));
-            mold.setSerialNumber(resultSet.getString(serialNumber));
-            mold.setCodeMold(resultSet.getString(code));
-            mold.setThickness(resultSet.getDouble(thickness));
-            mold.setVertical(resultSet.getDouble(vertical));
-            mold.setHorizontal(resultSet.getDouble(horizontal));
-            mold.setTonase(resultSet.getDouble(tonase));
+            mold.setId(resultSet.getInt(table + "." + id));
+            mold.setSerialNumber(resultSet.getString(table + "." +serialNumber));
+            mold.setCodeMold(resultSet.getString(table + "." +code));
+            mold.setThickness(resultSet.getDouble(table + "." +thickness));
+            mold.setVertical(resultSet.getDouble(table + "." + vertical));
+            mold.setHorizontal(resultSet.getDouble(table + "." +horizontal));
+            mold.setTonase(resultSet.getDouble(table + "." + tonase));
         } catch (SQLException e) {
             log.error("Failed Build Mold : " + String.valueOf(e), getClass());
         }

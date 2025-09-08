@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.8" prefWidth="1198.4" styleClass="back" stylesheets="@css/menuuser.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anoman.machinehistory.controller.TransactionInputController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="titleMenu" text="PERBAIKAN MOLD">
+               <font>
+                  <Font name="DejaVu Serif Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="250.0" styleClass="navBack" stylesheets="@css/menuuser.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="5.0" top="5.0" />
+         </BorderPane.margin>
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="navbody" stylesheets="@css/menuuser.css">
+               <children>
+                  <HBox fx:id="btnProblem" alignment="CENTER" onMouseClicked="#fncBtnProblem" prefHeight="40.0" prefWidth="200.0" styleClass="navbtn" stylesheets="@css/menuuser.css">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label styleClass="navText" stylesheets="@css/menuuser.css" text="MASALAH">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="btnActionRepair" alignment="CENTER" layoutX="30.0" layoutY="20.0" onMouseClicked="#fncBtnRepair" prefHeight="40.0" prefWidth="200.0" styleClass="navbtn" stylesheets="@css/menuuser.css">
+                     <children>
+                        <Label styleClass="navText" stylesheets="@css/menuuser.css" text="PERBAIKAN">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </left>
+   <center>
+      <ScrollPane fx:id="bodyContent" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="mainBack" stylesheets="@css/menuuser.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <BorderPane fx:id="mainContent" prefHeight="200.0" prefWidth="200.0" styleClass="mainBack" stylesheets="@css/menuuser.css" />
+         </content>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
+      </ScrollPane>
+   </center>
+</BorderPane>

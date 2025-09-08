@@ -26,7 +26,7 @@ public class ProductMoldRepositoryImpl implements ProductMoldRepository{
     String cvt = tableName.getCvtCol();
     String ct = tableName.getCtCol();
     String grammage = tableName.getGrammageCol();
-    String desc = tableName.getDescCol();
+    String desc = tableName.getDescriptionCol();
 
     MoldTableName moldTableName = new MoldTableName();
     ProductTableName productTableName = new ProductTableName();
@@ -182,6 +182,101 @@ public class ProductMoldRepositoryImpl implements ProductMoldRepository{
         }
 
         return productMoldList;
+    }
+
+    @Override
+    public ProductMold findByCode(String codeKeyword) {
+        ProductMold productMold = new ProductMold();
+        ProductMoldBuilder productMoldBuilder = new ProductMoldBuilder();
+        /**
+         * select * from product_mold
+         * join product on (product.id = product_mold.id_product)
+         * join mold on (mold.id = product_mold.id_mold);
+         */
+        try {
+            String query = "select * from " + table +
+                    " join " + productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " + table + "." + idProduct + " ) " +
+                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " + table + "." + idMold + " ) " +
+                    "where " + table + "." + code + " = ? ";
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, codeKeyword);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                productMold = productMoldBuilder.productMold(resultSet);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed find by product mold code : " + codeKeyword + String.valueOf(e), getClass());
+        }
+
+        return productMold;
+    }
+
+    @Override
+    public List<ProductMold> findByProductNameContaint(String keyword) {
+        List<ProductMold> productMoldList = new ArrayList<>();
+        ProductMoldBuilder productMoldBuilder = new ProductMoldBuilder();
+        /**
+         * select * from product_mold
+         * join product on (product.id = product_mold.id_product)
+         * join mold on (mold.id = product_mold.id_mold);
+         */
+        try {
+            String query = "select * from " + table +
+                    " join " + productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " + table + "." + idProduct + " ) " +
+                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " + table + "." + idMold + " ) "
+                    + " where " + productTableName.getTableName() + "." + productTableName.getNameColumn() + " like " + "'%" + keyword + "%'";
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                productMoldList.add(productMoldBuilder.productMold(resultSet));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed find all : " + String.valueOf(e), getClass());
+        }
+
+        return productMoldList;
+    }
+
+    @Override
+    public ProductMold findById(String idFind) {
+        ProductMold productMold = new ProductMold();
+        ProductMoldBuilder productMoldBuilder = new ProductMoldBuilder();
+        /**
+         * select * from product_mold
+         * join product on (product.id = product_mold.id_product)
+         * join mold on (mold.id = product_mold.id_mold);
+         */
+        try {
+            String query = "select * from " + table +
+                    " join " + productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " + table + "." + idProduct + " ) " +
+                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " + table + "." + idMold + " ) " +
+                    "where " + table + "." + id + " = ? ";
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, idFind);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                productMold = productMoldBuilder.productMold(resultSet);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed find by product mold id : " + idFind + String.valueOf(e), getClass());
+        }
+
+        return productMold;
     }
 
 }

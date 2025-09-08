@@ -5,6 +5,7 @@ import com.anoman.machinehistory.service.productmold.ProductMoldService;
 import com.anoman.machinehistory.service.productmold.ProductMoldServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,10 +40,21 @@ public class SubMasterDataMoldController {
 
     public void initialize() {
 
-        productMoldList = productMoldService.findAll();
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                productMoldList = productMoldService.findAll();
+                return null;
+            }
+        };
 
-        addDataTable(productMoldList);
+        task.setOnSucceeded(event -> {
+            addDataTable(productMoldList);
+        });
 
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     public void fncSearch(KeyEvent event) {

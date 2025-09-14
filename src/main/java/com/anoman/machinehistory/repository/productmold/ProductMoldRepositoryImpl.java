@@ -1,10 +1,13 @@
 package com.anoman.machinehistory.repository.productmold;
 
 import com.anoman.machinehistory.commons.MoldTableName;
+import com.anoman.machinehistory.commons.ProblemTableName;
 import com.anoman.machinehistory.commons.ProductMoldTableName;
 import com.anoman.machinehistory.commons.ProductTableName;
 import com.anoman.machinehistory.config.DatabaseConfig;
 import com.anoman.machinehistory.model.mold.ProductMold;
+import com.anoman.machinehistory.model.mold.ProductMoldReview;
+import com.anoman.machinehistory.shared.ProblemBuilder;
 import com.anoman.machinehistory.shared.ProductMoldBuilder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -166,7 +169,8 @@ public class ProductMoldRepositoryImpl implements ProductMoldRepository{
         try {
             String query = "select * from " + table +
                     " join " + productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " + table + "." + idProduct + " ) " +
-                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " + table + "." + idMold + " ) ";
+                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " + table + "." + idMold + " ) "
+                    + "order by " + productTableName.getTableName() + "." + productTableName.getNameColumn();
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -277,6 +281,45 @@ public class ProductMoldRepositoryImpl implements ProductMoldRepository{
         }
 
         return productMold;
+    }
+
+    @Override
+    public List<ProductMoldReview> findReviewMold() {
+        List<ProductMoldReview> productMoldReviewList = new ArrayList<>();
+        ProductMoldBuilder productMoldBuilder = new ProductMoldBuilder();
+        ProblemTableName problemTableName = new ProblemTableName();
+        /**
+         * SELECT
+         * pm.*,
+         * p.*,
+         * m.*,
+         * COUNT(prm.id_product_mold) AS problem
+         * FROM product_mold pm
+         * join product p on pm.id_product = p.id
+         * join mold m on m.id = pm.id_mold
+         * left join problem_mold prm on prm.id_product_mold = pm.id
+         * group by pm.id, p.id order by problem desc;
+         */
+        try {
+            String query = "SELECT pm.* , p.* , m.*, COUNT(prm.id_product_mold) AS problem from " +
+                    table + " pm " + "join " + productTableName.getTableName() + " p on pm." + idProduct + " = " + " p." + productTableName.getIdColumn() +
+                    " join " + moldTableName.getTableName() + " m on m." + moldTableName.getIdCol() + " = " + " pm." + idMold +
+                    " left join " + problemTableName.getTableName() + " prm on prm." + problemTableName.getIdProductMoldCol() + " = " + " pm." + id +
+                    " group by pm.id, p.id order by problem desc";
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                productMoldReviewList.add(productMoldBuilder.productMoldWithProblem(resultSet));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed rekap mold : " + String.valueOf(e), getClass());
+        }
+
+        return productMoldReviewList;
     }
 
 }

@@ -2,6 +2,7 @@ package com.anoman.machinehistory.shared;
 
 import com.anoman.machinehistory.commons.ProductMoldTableName;
 import com.anoman.machinehistory.model.mold.ProductMold;
+import com.anoman.machinehistory.model.mold.ProductMoldReview;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +49,28 @@ public class ProductMoldBuilder {
         }
 
         return productMold;
+    }
+
+    public ProductMoldReview productMoldWithProblem (ResultSet resultSet) {
+        ProductMoldReview productMoldReview = new ProductMoldReview();
+
+        try {
+            productMoldReview.setId(resultSet.getInt("pm." + id));
+            productMoldReview.setProduct(productBuilder.productUpdateAndReadAlias(resultSet));
+            productMoldReview.setMold(moldBuilder.moldAlias(resultSet));
+            productMoldReview.setCode(resultSet.getString("pm." + code));
+            productMoldReview.setCvt(resultSet.getInt("pm."  + cvt));
+            productMoldReview.setCt(resultSet.getDouble("pm."  + ct));
+            productMoldReview.setGrammage(resultSet.getDouble("pm."  + grammage));
+            productMoldReview.setDescription(resultSet.getString("pm."  + desc));
+            productMoldReview.setCountProblem(resultSet.getInt("problem"));
+
+
+        } catch (SQLException e) {
+            log.error("failed build product mold : " + String.valueOf(e), getClass());
+        }
+
+        return productMoldReview;
     }
 
 

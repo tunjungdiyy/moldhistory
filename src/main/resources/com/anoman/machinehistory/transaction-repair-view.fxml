@@ -41,7 +41,16 @@
                               <Insets bottom="5.0" left="20.0" top="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <HBox fx:id="btnSearch" prefHeight="30.0" prefWidth="30.0">
+                        <DatePicker fx:id="tfDateFrom" promptText="dari">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></DatePicker>
+                        <DatePicker fx:id="tfDateTo" promptText="sampai">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <HBox fx:id="btnSearch" onMouseClicked="#fncbtnSearch" prefHeight="30.0" prefWidth="30.0" styleClass="btnMenu" stylesheets="@css/submenu.css">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" top="5.0" />
                            </HBox.margin>
@@ -56,12 +65,6 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <DatePicker fx:id="tfDateFrom" onAction="#fncDateFrom" promptText="dari" />
-                        <DatePicker fx:id="tfDateTo" onAction="#fncDateTo" promptText="sampai">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </DatePicker>
                         <HBox fx:id="btnAdd" layoutX="235.0" layoutY="15.0" onMouseClicked="#fncAdd" prefHeight="30.0" prefWidth="30.0" styleClass="btnMenu" stylesheets="@css/submenu.css">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -86,9 +89,9 @@
                      <content>
                         <TableView fx:id="tableRepair" prefHeight="200.0" prefWidth="600.0">
                           <columns>
-                              <TableColumn fx:id="ProductNameColumn" maxWidth="600.0" minWidth="200.0" prefWidth="250.0" text="Nama Produk" />
+                              <TableColumn fx:id="ProductNameColumn" maxWidth="600.0" minWidth="200.0" prefWidth="250.0" text="Mold" />
                               <TableColumn fx:id="cvtColumn" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" text="CVT" />
-                              <TableColumn fx:id="problemColumn" maxWidth="500.0" minWidth="150.0" prefWidth="200.0" text="Problem" />
+                              <TableColumn fx:id="problemColumn" maxWidth="500.0" minWidth="150.0" prefWidth="200.0" text="Kerusakan" />
                               <TableColumn fx:id="repairAction" maxWidth="400.0" minWidth="100.0" prefWidth="150.0" text="Perbaikan" />
                             <TableColumn fx:id="teamColumn" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" text="Team" />
                               <TableColumn fx:id="dateRepairColumn" maxWidth="400.0" minWidth="100.0" prefWidth="200.0" text="Tanggal Pengerjaan" />

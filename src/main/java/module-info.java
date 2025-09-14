@@ -12,6 +12,7 @@ module com.anoman.machinehistory {
     requires java.sql;
     requires static lombok;
     requires commons.math3;
+    requires java.desktop;
 
     opens com.anoman.machinehistory to javafx.fxml;
     exports com.anoman.machinehistory;

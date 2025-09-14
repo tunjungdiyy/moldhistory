@@ -28,4 +28,6 @@ public interface ProblemRepository {
     List<Problem> findByProductName(String productNameKeyword);
 
     List<Problem> findByCodeContain(String keyword);
+
+    List<Problem> findByCodeProductMoldAndDate(String codeProductMold, Long milisFrom, Long milisTo);
 }

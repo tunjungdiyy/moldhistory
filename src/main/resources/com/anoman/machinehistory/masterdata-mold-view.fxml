@@ -81,7 +81,7 @@
                           <columns>
                             <TableColumn fx:id="idColoumn" maxWidth="200.0" minWidth="100.0" prefWidth="100.0" text="Code" />
                             <TableColumn fx:id="noSeriColumn" maxWidth="200.0" minWidth="150.0" prefWidth="150.0" text="No Seri" />
-                              <TableColumn fx:id="ProductNameColumn" maxWidth="600.0" minWidth="300.0" prefWidth="300.0" text="Nama Produk" />
+                              <TableColumn fx:id="ProductNameColumn" maxWidth="600.0" minWidth="300.0" prefWidth="300.0" text="Mold" />
                               <TableColumn fx:id="cvtColumn" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" text="CVT" />
                               <TableColumn fx:id="descriptionColumn" maxWidth="500.0" minWidth="250.0" prefWidth="250.0" text="Keterangan" />
                           </columns>

@@ -297,7 +297,8 @@ public class ProblemRepositoryImpl implements ProblemRepository{
                     moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
                     "where " + status + " = ? and " +
-                    problemDate + " between " + milisfrom + " and " + milisto;
+                    problemDate + " between " + milisfrom + " and " + milisto +
+                    " order by " + table + "." + problemDate;
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
             preparedStatement.setString(1, statusFind);
 
@@ -335,7 +336,8 @@ public class ProblemRepositoryImpl implements ProblemRepository{
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdProductCol() + ") join " +
                     moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
-                    "where " + problemDate + " between " + milisfrom + " and " + milisTo;
+                    "where " + problemDate + " between " + milisfrom + " and " + milisTo +
+                    " order by " + table + "." + problemDate ;
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -409,7 +411,8 @@ public class ProblemRepositoryImpl implements ProblemRepository{
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdProductCol() + ") join " +
                     moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
-                    "where " + table + "." + code + " like " + "'%" + keyword + "%'";
+                    "where " + table + "." + code + " like " + "'%" + keyword + "%'" +
+                    " and " + table + "." + status + " != 'SELESAI' "  ;
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -422,6 +425,46 @@ public class ProblemRepositoryImpl implements ProblemRepository{
             preparedStatement.close();
         } catch (SQLException e) {
             log.error("failed find by code contain : " + String.valueOf(e), getClass());
+        }
+
+        return problemList;
+    }
+
+    @Override
+    public List<Problem> findByCodeProductMoldAndDate(String codeProductMold, Long milisFrom, Long milisTo) {
+        List<Problem> problemList = new ArrayList<>();
+
+        /**
+         * select * from problem_mold
+         * join product_mold on (product_mold.id = problem_mold.id_product_mold)
+         * join product on (product.id = product_mold.id_product)
+         * join mold on (mold.id = product_mold.id_mold);
+         */
+
+        try {
+            String query = "select * from " + table + " join " +
+                    productMoldTableName.getTableName() + " on ( " + productMoldTableName.getTableName() + "." + productMoldTableName.getIdCol() + " = " +
+                    table + "." + idProductMold + " ) join " +
+                    productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " +
+                    productMoldTableName.getTableName() + "." + productMoldTableName.getIdProductCol() + ") join " +
+                    moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
+                    productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
+                    "where " + productMoldTableName.getTableName() + "." + productMoldTableName.getCodeCol() + " = ? and " +
+                    problemDate + " between " + milisFrom + " and " + milisTo +
+                    " order by " + table + "." + problemDate;
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, codeProductMold);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                problemList.add(problemBuilder.problem(resultSet));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed find by status : " + String.valueOf(e), getClass());
         }
 
         return problemList;

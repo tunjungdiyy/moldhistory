@@ -1,6 +1,5 @@
 package com.anoman.machinehistory.controller;
 
-import com.anoman.machinehistory.model.mold.ProductMold;
 import com.anoman.machinehistory.model.problem.Problem;
 import com.anoman.machinehistory.model.repair.RepairMold;
 import com.anoman.machinehistory.service.problem.ProblemService;
@@ -19,11 +18,13 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Slf4j
 public class DialogRepairMoldController {
     public Label titleLable;
     public HBox btnCanceled;
@@ -150,6 +151,46 @@ public class DialogRepairMoldController {
     }
 
     public void fncSave(ActionEvent actionEvent) {
+
+        if (tfRepairAction.getText().isBlank() || tfStarDateRepair.getValue() == null|| tfEndDateRepair.getValue() == null ||
+        tfRepairteam.getText().isBlank() || tfProductName.getText().isBlank()) {
+            alertApp.showAlert("error", "Textfile Kecuali Catatan tidak boleh kosong !!");
+        } else {
+            if (titleLable.getText().equals("FORM TAMBAH DATA")) {
+                Problem problem = problemService.findByCodeUniqueProblem(tfProductName.getText());
+                log.info(problem.getCodeProblem(), getClass());
+
+                repairMold = new RepairMold();
+
+                repairMold.setProblem(problem);
+                repairMold.setAction(tfRepairAction.getText());
+                repairMold.setRepairStart(ConvertionMilistoDate.LocalDateToMilis(tfStarDateRepair.getValue()));
+                repairMold.setReapirEnd(ConvertionMilistoDate.LocalDateToMilis(tfEndDateRepair.getValue()));
+                repairMold.setTeamRepair(tfRepairteam.getText());
+                repairMold.setNoteRepair(tfNote.getText());
+
+                repairMoldService.save(repairMold);
+
+                closeDialog();
+            } else if (titleLable.getText().equals("FORM EDIT DATA")){
+                RepairMold update = new RepairMold();
+
+                update.setId(repairMold.getId());
+                log.info(String.valueOf(update.getId()), getClass());
+                update.setCodeRepair(repairMold.getCodeRepair());
+                update.setProblem(repairMold.getProblem());
+                update.setAction(tfRepairAction.getText());
+                update.setRepairStart(ConvertionMilistoDate.LocalDateToMilis(tfStarDateRepair.getValue()));
+                update.setReapirEnd(ConvertionMilistoDate.LocalDateToMilis(tfEndDateRepair.getValue()));
+                update.setTeamRepair(tfRepairteam.getText());
+                update.setNoteRepair(tfNote.getText());
+
+                repairMoldService.update(update);
+
+                closeDialog();
+            }
+        }
+
     }
 
     public void setTitle(String title, RepairMold repairMold) {
@@ -172,6 +213,7 @@ public class DialogRepairMoldController {
             tfEndDateRepair.setValue(ConvertionMilistoDate.milistoLocalDate(repairMold.getReapirEnd()));
             tfRepairteam.setText(repairMold.getTeamRepair());
             tfNote.setText(repairMold.getNoteRepair());
+            this.repairMold = repairMold;
 
         }
 

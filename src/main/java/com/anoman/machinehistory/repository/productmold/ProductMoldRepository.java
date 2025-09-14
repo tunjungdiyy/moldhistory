@@ -1,6 +1,7 @@
 package com.anoman.machinehistory.repository.productmold;
 
 import com.anoman.machinehistory.model.mold.ProductMold;
+import com.anoman.machinehistory.model.mold.ProductMoldReview;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ProductMoldRepository {
     List<ProductMold> findByProductNameContaint(String keyword);
 
     ProductMold findById(String idFind);
+
+    List<ProductMoldReview> findReviewMold();
 }

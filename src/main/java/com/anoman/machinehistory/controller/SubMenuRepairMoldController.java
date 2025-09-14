@@ -9,7 +9,6 @@ import com.anoman.machinehistory.utility.alert.AlertApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -22,11 +21,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 public class SubMenuRepairMoldController {
     public TextField tfSearch;
     public DatePicker tfDateFrom;
@@ -41,6 +42,7 @@ public class SubMenuRepairMoldController {
     public TableColumn<RepairMold, String> dateRepairColumn;
     public TableColumn<RepairMold, Void> actionCokumn;
     public Stage stage;
+    public HBox btnSearch;
 
 
     RepairMoldService repairMoldService = new RepairMoldServiceImpl();
@@ -50,16 +52,31 @@ public class SubMenuRepairMoldController {
 
     List<RepairMold> list;
 
+    AlertApp alertApp = new AlertApp();
+
     public void initialize() {
         showInitial();
     }
 
     public void fncSearch(KeyEvent event) {
+
+        if (!tfSearch.getText().isBlank()) {
+            repairMoldList = repairMoldService.findByProductNameContaint(tfSearch.getText().toUpperCase());
+
+            tfDateFrom.setValue(null);
+            tfDateTo.setValue(null);
+            addDataTable(repairMoldList);
+        } else {
+            showInitial();
+        }
+
     }
 
     public void fncAdd(MouseEvent mouseEvent) throws IOException {
 
         showDialog("add", null);
+
+        showInitial();
 
     }
 
@@ -97,27 +114,17 @@ public class SubMenuRepairMoldController {
             public TableCell<RepairMold, Void> call(TableColumn<RepairMold, Void> param) {
                 return new TableCell<>() {
                     public final Button btnEdit = new Button("EDIT");
-                    public final Button btnPrint = new Button("PRINT");
                     {
                         btnEdit.setOnAction(event -> {
                             RepairMold repairMold = getTableView().getItems().get(getIndex());
                             try {
-                                System.out.println("Function Edit");
                                 showDialog("edit", repairMold);
-
+                                showInitial();
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         });
 
-                        btnPrint.setOnAction(event -> {
-                            RepairMold repairMold = getTableView().getItems().get(getIndex());
-                            try {
-                                // action
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        });
                     }
 
                     public void updateItem(Void item, boolean empty) {
@@ -125,7 +132,7 @@ public class SubMenuRepairMoldController {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            HBox hBox = new HBox(5, btnEdit, btnPrint);
+                            HBox hBox = new HBox(5, btnEdit);
                             setGraphic(hBox);
                             hBox.setAlignment(Pos.CENTER);
                             hBox.setPrefHeight(10);
@@ -142,12 +149,6 @@ public class SubMenuRepairMoldController {
         tableRepair.setItems(repairMoldObservableList);
     }
 
-    public void fncDateFrom(ActionEvent actionEvent) {
-    }
-
-    public void fncDateTo(ActionEvent actionEvent) {
-    }
-
     void showDialog(String title, RepairMold repairMold) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("/com/anoman/machinehistory/dialog-repair-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -160,5 +161,24 @@ public class SubMenuRepairMoldController {
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(btnAdd.getScene().getWindow());
         dialogStage.showAndWait();
+    }
+
+    public void fncbtnSearch(MouseEvent mouseEvent) {
+        log.info("function search", getClass());
+        if (tfSearch.getText().isBlank()) {
+            if (tfDateFrom.getValue() == null || tfDateTo.getValue() == null) {
+                alertApp.showAlert("warning", "textfield tangal dari dan sampai Tidak Boleh kosong");
+            } else {
+                repairMoldList = repairMoldService.findByDate(ConvertionMilistoDate.LocalDateToMilis(tfDateFrom.getValue()), ConvertionMilistoDate.LocalDateToMilis(tfDateTo.getValue()));
+                addDataTable(repairMoldList);
+            }
+        } else {
+            if (tfDateFrom.getValue() == null || tfDateTo.getValue() == null) {
+                alertApp.showAlert("warning", "textfield tangal dari dan sampai Tidak Boleh kosong");
+            } else {
+                repairMoldList = repairMoldService.findBynameProductAndRepairdate(tfSearch.getText().toUpperCase(), ConvertionMilistoDate.LocalDateToMilis(tfDateFrom.getValue()), ConvertionMilistoDate.LocalDateToMilis(tfDateTo.getValue()));
+                addDataTable(repairMoldList);
+            }
+        }
     }
 }

@@ -46,5 +46,23 @@ public class MoldBuilder {
         return mold;
     }
 
+    public Mold moldAlias(ResultSet resultSet) {
+        Mold mold = new Mold();
+
+        try {
+            mold.setId(resultSet.getInt("m." + id));
+            mold.setSerialNumber(resultSet.getString("m." +serialNumber));
+            mold.setCodeMold(resultSet.getString("m." +code));
+            mold.setThickness(resultSet.getDouble("m." +thickness));
+            mold.setVertical(resultSet.getDouble("m." + vertical));
+            mold.setHorizontal(resultSet.getDouble("m." +horizontal));
+            mold.setTonase(resultSet.getDouble("m." + tonase));
+        } catch (SQLException e) {
+            log.error("Failed Build Mold : " + String.valueOf(e), getClass());
+        }
+
+        return mold;
+    }
+
 
 }

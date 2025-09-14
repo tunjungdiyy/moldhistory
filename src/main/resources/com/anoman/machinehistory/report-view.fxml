@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.6" prefWidth="924.8" styleClass="back" stylesheets="@css/submenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anoman.machinehistory.controller.ReportMenuController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="LAPORAN">
+               <font>
+                  <Font name="DejaVu Serif Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="200.0" prefWidth="200.0" styleClass="back" stylesheets="@css/submenu.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox fx:id="btnMold" alignment="CENTER" onMouseClicked="#fncMold" prefHeight="200.0" prefWidth="100.0" styleClass="card" stylesheets="@css/submenu.css">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                     <children>
+                        <Label text="MOLD">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="btnProduct" alignment="CENTER" layoutX="20.0" layoutY="20.0" onMouseClicked="#fncProduct" prefHeight="200.0" prefWidth="100.0" styleClass="card" stylesheets="@css/submenu.css" GridPane.columnIndex="1">
+                     <children>
+                        <Label text="PRODUK">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox fx:id="btnProblem" alignment="CENTER" layoutX="247.0" layoutY="20.0" onMouseClicked="#fncProbleMold" prefHeight="200.0" prefWidth="100.0" styleClass="card" stylesheets="@css/submenu.css" GridPane.columnIndex="2">
+                     <children>
+                        <Label text="PROBLEM MOLD" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox fx:id="btnrepair" alignment="CENTER" layoutX="472.0" layoutY="20.0" onMouseClicked="#fncRepairMold" prefHeight="200.0" prefWidth="100.0" styleClass="card" stylesheets="@css/submenu.css" GridPane.columnIndex="3">
+                     <children>
+                        <Label text="PERBAIKAN MOLD" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox fx:id="btnRekapMold" alignment="CENTER" layoutX="473.0" layoutY="20.0" onMouseClicked="#fncRekapMold" prefHeight="200.0" prefWidth="100.0" styleClass="card" stylesheets="@css/submenu.css" GridPane.columnIndex="4">
+                     <children>
+                        <Label text="REKAP MOLD" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="DejaVu Serif Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+               </children>
+            </GridPane>
+         </content>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </ScrollPane>
+   </center>
+</BorderPane>

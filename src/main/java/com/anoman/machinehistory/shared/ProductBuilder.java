@@ -40,4 +40,19 @@ public class ProductBuilder {
         return productUpdateAndRead;
     }
 
+    public ProductUpdateAndRead productUpdateAndReadAlias(ResultSet resultSet) {
+        ProductUpdateAndRead productUpdateAndRead = new ProductUpdateAndRead();
+        try {
+            productUpdateAndRead.setId(resultSet.getInt("p."+ id));
+            productUpdateAndRead.setName(resultSet.getString("p."+ productName));
+            productUpdateAndRead.setCodeProduct(resultSet.getString("p."+ code));
+            productUpdateAndRead.setDescription(resultSet.getString("p."+ desc));
+
+        } catch (SQLException e) {
+            log.error("faled build product : " + String.valueOf(e), getClass());
+        }
+
+        return productUpdateAndRead;
+    }
+
 }

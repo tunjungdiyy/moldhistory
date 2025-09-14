@@ -1,6 +1,7 @@
 package com.anoman.machinehistory.service.productmold;
 
 import com.anoman.machinehistory.model.mold.ProductMold;
+import com.anoman.machinehistory.model.mold.ProductMoldReview;
 import com.anoman.machinehistory.repository.productmold.ProductMoldRepository;
 import com.anoman.machinehistory.repository.productmold.ProductMoldRepositoryImpl;
 import com.anoman.machinehistory.service.mold.MoldService;
@@ -67,5 +68,10 @@ public class ProductMoldServiceImpl implements ProductMoldService{
     @Override
     public ProductMold findById(String productMoldId) {
         return productMoldRepository.findById(productMoldId);
+    }
+
+    @Override
+    public List<ProductMoldReview> reviewMold() {
+        return productMoldRepository.findReviewMold();
     }
 }

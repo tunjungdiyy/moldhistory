@@ -16,4 +16,6 @@ public interface RepairMoldService {
 
     List<RepairMold> findbyTeamContaint(String keyword);
 
+    List<RepairMold>findBynameProductAndRepairdate(String keyword, Long start, Long end);
+
 }

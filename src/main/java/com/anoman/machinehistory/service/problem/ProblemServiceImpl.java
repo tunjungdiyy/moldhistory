@@ -73,4 +73,16 @@ public class ProblemServiceImpl implements ProblemService{
     public List<Problem> findbyCodeContain(String keyword) {
         return problemRepository.findByCodeContain(keyword);
     }
+
+    @Override
+    public Problem findByCodeUniqueProblem(String codeUnique) {
+        return problemRepository.findbyCodeProblem(codeUnique);
+    }
+
+    @Override
+    public List findByCodeProductMoldAndDate(String codeProductMold, Long milisfrom, Long milisTo) {
+        return problemRepository.findByCodeProductMoldAndDate(codeProductMold, milisfrom, milisTo);
+    }
+
+
 }

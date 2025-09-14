@@ -9,7 +9,9 @@ import com.anoman.machinehistory.repository.repair.RepairMoldRepository;
 import com.anoman.machinehistory.repository.repair.RepairMoldRepositoryimpl;
 import com.anoman.machinehistory.service.squence.SquenceService;
 import com.anoman.machinehistory.service.squence.SquenceServiceImpl;
+import com.anoman.machinehistory.utility.ConvertionMilistoDate;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class RepairMoldServiceImpl implements RepairMoldService{
@@ -21,11 +23,11 @@ public class RepairMoldServiceImpl implements RepairMoldService{
     @Override
     public Boolean save(RepairMold repairMold) {
 
-        String code = squenceService.generatorid("repair_mold", "RM", repairMold.getReapirEnd(), "");
+        String code = squenceService.generatorid("repair_mold", "RM", repairMold.getReapirEnd(), String.valueOf(ConvertionMilistoDate.milistoLocalDate(repairMold.getReapirEnd())));
 
         repairMold.setCodeRepair(code);
 
-        repairMoldRepository.create(repairMold);
+        Boolean value = repairMoldRepository.create(repairMold);
 
         Problem problem = problemRepository.findById(repairMold.getProblem().getId());
 
@@ -38,7 +40,9 @@ public class RepairMoldServiceImpl implements RepairMoldService{
         update.setDescription(problem.getDescriptionProblem());
         update.setProblemDate(problem.getProblemDate());
 
-        problemRepository.update(update);
+        if (value) {
+            problemRepository.update(update);
+        }
 
         return true;
     }
@@ -63,5 +67,10 @@ public class RepairMoldServiceImpl implements RepairMoldService{
     @Override
     public List<RepairMold> findbyTeamContaint(String keyword) {
         return repairMoldRepository.findByTeamRepairContaint(keyword);
+    }
+
+    @Override
+    public List<RepairMold> findBynameProductAndRepairdate(String keyword, Long start, Long end) {
+        return repairMoldRepository.findByNameProductAndDateRepair(keyword, start, end);
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RepairMoldRepository {
 
-    void create(RepairMold repairMold);
+    Boolean create(RepairMold repairMold);
 
     void update(RepairMold repairMold);
 
@@ -18,4 +18,5 @@ public interface RepairMoldRepository {
 
     List<RepairMold> findByProductName(String nameProductFind);
 
+    List<RepairMold> findByNameProductAndDateRepair(String keywordname, Long start, Long end);
 }

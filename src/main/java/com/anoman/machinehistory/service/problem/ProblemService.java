@@ -23,5 +23,9 @@ public interface ProblemService {
 
     List<Problem> findbyCodeContain(String keyword);
 
+    Problem findByCodeUniqueProblem(String codeUnique);
+
+    List findByCodeProductMoldAndDate(String codeProductMold, Long milisfrom, Long milisTo);
+
 
 }

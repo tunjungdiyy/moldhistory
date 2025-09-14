@@ -39,6 +39,10 @@ public class MenuController {
 
     AlertApp alertApp = new AlertApp();
 
+    public void initialize() {
+        showContent("/com/anoman/machinehistory/menu-home-view.fxml");
+    }
+
     public void drag(MouseEvent mouseEvent) {
         panelNavigasi.drag(stage, mouseEvent);
     }
@@ -65,6 +69,7 @@ public class MenuController {
     }
 
     public void showrRepostMenu(MouseEvent mouseEvent) {
+        showContent("/com/anoman/machinehistory/report-view.fxml");
     }
 
     public void showMasterDataMenu(MouseEvent mouseEvent) {
@@ -76,6 +81,7 @@ public class MenuController {
     }
 
     public void showHomeMenu(MouseEvent mouseEvent) {
+        showContent("/com/anoman/machinehistory/menu-home-view.fxml");
     }
 
     void showContent(String url) {

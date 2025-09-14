@@ -1,11 +1,14 @@
 package com.anoman.machinehistory.controller;
 
+import com.anoman.machinehistory.config.PrintConfig;
 import com.anoman.machinehistory.model.problem.Problem;
 import com.anoman.machinehistory.repository.problem.ProblemRepository;
 import com.anoman.machinehistory.repository.problem.ProblemRepositoryImpl;
 import com.anoman.machinehistory.service.problem.ProblemService;
 import com.anoman.machinehistory.service.problem.ProblemServiceImpl;
 import com.anoman.machinehistory.utility.ConvertionMilistoDate;
+import com.anoman.machinehistory.utility.FormRepairMoldController;
+import com.anoman.machinehistory.utility.PrintPreviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -117,7 +120,29 @@ public class SubMenuProblemMoldController {
                         btnPrint.setOnAction(event -> {
                             Problem problem = getTableView().getItems().get(getIndex());
                             try {
-                                // action
+                                FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("/com/anoman/machinehistory/util/form-repair-mold.fxml"));
+                                Parent root = fxmlLoader.load();
+
+                                Stage dialogStage = new Stage();
+                                dialogStage.setScene(new Scene(root));
+
+                                FormRepairMoldController controller = fxmlLoader.getController();
+                                controller.setData(problem);
+
+//                                PrintConfig.showPreview(controller.getPanePrintRepair());
+
+                                FXMLLoader fxmlLoaderPreview = new FXMLLoader(MenuController.class.getResource("/com/anoman/machinehistory/util/review-print-view.fxml"));
+                                Parent roorReview = fxmlLoaderPreview.load();
+
+                                Stage reviewStage = new Stage();
+                                reviewStage.setScene(new Scene(roorReview));
+                                PrintPreviewController previewController = fxmlLoaderPreview.getController();
+                                previewController.initialize(controller.getPanePrintRepair());
+                                reviewStage.initStyle(StageStyle.UNDECORATED);
+                                reviewStage.initModality(Modality.WINDOW_MODAL);
+                                reviewStage.initOwner(btnAdd.getScene().getWindow());
+                                reviewStage.showAndWait();
+
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }

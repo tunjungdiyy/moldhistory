@@ -34,7 +34,7 @@ public class RepairMoldRepositoryimpl implements RepairMoldRepository{
     RepairMoldBuilder repairMoldBuilder = new RepairMoldBuilder();
 
     @Override
-    public void create(RepairMold repairMold) {
+    public Boolean create(RepairMold repairMold) {
 
         try {
             String query = "insert into " + table + " ( " + idProblem + " , " + code + " , " + action + " , " +
@@ -51,8 +51,10 @@ public class RepairMoldRepositoryimpl implements RepairMoldRepository{
             preparedStatement.executeUpdate();
 
             preparedStatement.close();
+            return true;
         } catch (SQLException e) {
             log.error("failed create repair mold : " + String.valueOf(e), getClass());
+            return false;
         }
 
     }
@@ -224,6 +226,47 @@ public class RepairMoldRepositoryimpl implements RepairMoldRepository{
                     "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
                     productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
                     "where " + productTableName.getTableName() + "." + productTableName.getNameColumn() + " like " + "'%" + nameProductFind + "%'";
+            PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                repairMoldList.add(repairMoldBuilder.repairMold(resultSet));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            log.error("failed find by id product name :" + String.valueOf(e), getClass());
+        }
+
+        return repairMoldList;
+    }
+
+    @Override
+    public List<RepairMold> findByNameProductAndDateRepair(String keywordname, Long start, Long end) {
+        List<RepairMold> repairMoldList = new ArrayList<>();
+        try {
+            /**
+             * select * from repair_mold
+             * join problem_mold on (problem_mold.id_problem = repair_mold.id_problem_mold)
+             * join product_mold on (product_mold.id = problem_mold.id_product_mold)
+             * join product on (product.id = product_mold.id_product)
+             * join mold on (mold.id = product_mold.id_mold);
+             */
+
+            String query = "select * from " + table +
+                    " join " + problemTableName.getTableName() + " on ( " + problemTableName.getTableName() + "." + problemTableName.getIdCol() + " = " +
+                    table + "." + idProblem + " ) " +
+                    "join " + productMoldTableName.getTableName() + " on ( " + productMoldTableName.getTableName() + "." + productMoldTableName.getIdCol() + " = " +
+                    problemTableName.getTableName() + "." + problemTableName.getIdProductMoldCol() + " ) " +
+                    "join " + productTableName.getTableName() + " on ( " + productTableName.getTableName() + "." + productTableName.getIdColumn() + " = " +
+                    productMoldTableName.getTableName() + "." + productMoldTableName.getIdProductCol() + " ) " +
+                    "join " + moldTableName.getTableName() + " on ( " + moldTableName.getTableName() + "." + moldTableName.getIdCol() + " = " +
+                    productMoldTableName.getTableName() + "." + productMoldTableName.getIdMoldCol() + " ) " +
+                    "where " + productTableName.getTableName() + "." + productTableName.getNameColumn() + " like " + "'%" + keywordname + "%'" +
+                    " and " + endRepair + " between " + start + " and " + end;
+
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();

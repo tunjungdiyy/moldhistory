@@ -125,7 +125,7 @@ public class ProductRepositoryImpl implements ProductRepository{
         List<ProductUpdateAndRead> productUpdateAndReadList = new ArrayList<>();
 
         try {
-            String query = "select * from " + tableName.getTableName();
+            String query = "select * from " + tableName.getTableName() + " order by " + tableName.getNameColumn();
             PreparedStatement preparedStatement = DatabaseConfig.getConnection().prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();

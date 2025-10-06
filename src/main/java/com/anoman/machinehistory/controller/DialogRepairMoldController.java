@@ -57,6 +57,9 @@ public class DialogRepairMoldController {
     PopupControl popupControl = new PopupControl();
 
     public void initialize() {
+
+        tfDate.setDisable(true);
+
         tfDate.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate object) {
@@ -217,16 +220,6 @@ public class DialogRepairMoldController {
 
         }
 
-    }
-
-    void setEditable() {
-        tfProductName.setDisable(false);
-        tfName.setDisable(false);
-        tfRepairAction.setDisable(false);
-        tfStarDateRepair.setDisable(false);
-        tfEndDateRepair.setDisable(false);
-        tfRepairteam.setDisable(false);
-        tfNote.setDisable(false);
     }
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

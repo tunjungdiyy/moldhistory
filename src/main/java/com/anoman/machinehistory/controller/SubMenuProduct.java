@@ -95,17 +95,18 @@ public class SubMenuProduct {
 
         if (tfNama.getText().isBlank()) {
             alertApp.showAlert("error", "nama tidak boleh kosong");
-        }
-
-        Boolean value = productService.register(tfNama.getText(), tfDescription.getText());
-
-        if (value) {
-            productUpdateAndReadList = productService.findAll();
-
-            addTableData(productUpdateAndReadList);
-            setEmpty();
         } else {
-            alertApp.showAlert("error", "Terjadi Kesalahan Sistem");
+
+            Boolean value = productService.register(tfNama.getText(), tfDescription.getText());
+
+            if (value) {
+                productUpdateAndReadList = productService.findAll();
+
+                addTableData(productUpdateAndReadList);
+                setEmpty();
+            } else {
+                alertApp.showAlert("error", "Terjadi Kesalahan Sistem");
+            }
         }
 
     }

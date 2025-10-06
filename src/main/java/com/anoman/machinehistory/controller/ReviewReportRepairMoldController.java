@@ -214,7 +214,7 @@ public class ReviewReportRepairMoldController {
         setFooterdateExport(sheet, workbook);
 
         // ======= Tentukan direktori tujuan =======
-        File fileexcel = PdfDirectoryConfig.getXlxs("daftar-kerusakan-mold.xlsx");
+        File fileexcel = PdfDirectoryConfig.getXlxs("daftar-perbaikan-mold.xlsx");
 
         try (FileOutputStream fos = new FileOutputStream(fileexcel)) {
             workbook.write(fos);

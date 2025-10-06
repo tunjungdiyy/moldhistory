@@ -172,6 +172,12 @@ public class DialogMoldController {
                 mold.setThickness(Double.parseDouble(tfThickness.getText()));
             }
 
+            if (tfSerialNumber.getText().isBlank()) {
+                mold.setSerialNumber("");
+            } else {
+                mold.setSerialNumber(tfSerialNumber.getText());
+            }
+
             if (tfVertical.getText().isBlank()) {
                 mold.setVertical(0.0);
             } else {

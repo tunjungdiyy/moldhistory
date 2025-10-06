@@ -27,6 +27,8 @@ module com.anoman.machinehistory {
     exports com.anoman.machinehistory.utility;
     opens com.anoman.machinehistory.utility.alert to javafx.fxml;
     exports com.anoman.machinehistory.utility.alert;
+    opens com.anoman.machinehistory.shared to javafx.fxml;
+    exports com.anoman.machinehistory.shared;
 
     //model
     //1. user
@@ -34,18 +36,46 @@ module com.anoman.machinehistory {
     exports com.anoman.machinehistory.model.user;
     opens com.anoman.machinehistory.model.squence to javafx.fxml;
     exports com.anoman.machinehistory.model.squence;
+    opens com.anoman.machinehistory.model.mold to javafx.fxml;
+    exports com.anoman.machinehistory.model.mold;
+    opens com.anoman.machinehistory.model.problem to javafx.fxml;
+    exports com.anoman.machinehistory.model.problem;
+    opens com.anoman.machinehistory.model.produk to javafx.fxml;
+    exports com.anoman.machinehistory.model.produk;
+    opens com.anoman.machinehistory.model.repair to javafx.fxml;
+    exports com.anoman.machinehistory.model.repair;
 
     //repository
     opens com.anoman.machinehistory.repository.user to javafx.fxml;
     exports com.anoman.machinehistory.repository.user;
     opens com.anoman.machinehistory.repository.squence to javafx.fxml;
     exports com.anoman.machinehistory.repository.squence;
+    opens com.anoman.machinehistory.repository.mold to javafx.fxml;
+    exports com.anoman.machinehistory.repository.mold;
+    opens com.anoman.machinehistory.repository.productmold to javafx.fxml;
+    exports com.anoman.machinehistory.repository.productmold;
+    opens com.anoman.machinehistory.repository.problem to javafx.fxml;
+    exports com.anoman.machinehistory.repository.problem;
+    opens com.anoman.machinehistory.repository.product to javafx.fxml;
+    exports com.anoman.machinehistory.repository.product;
+    opens com.anoman.machinehistory.repository.repair to javafx.fxml;
+    exports com.anoman.machinehistory.repository.repair;
 
     //service
     opens com.anoman.machinehistory.service.user to javafx.fxml;
     exports com.anoman.machinehistory.service.user;
     opens com.anoman.machinehistory.service.squence to javafx.fxml;
     exports com.anoman.machinehistory.service.squence;
+    opens com.anoman.machinehistory.service.mold to javafx.fxml;
+    exports com.anoman.machinehistory.service.mold;
+    opens com.anoman.machinehistory.service.productmold to javafx.fxml;
+    exports com.anoman.machinehistory.service.productmold;
+    opens com.anoman.machinehistory.service.problem to javafx.fxml;
+    exports com.anoman.machinehistory.service.problem;
+    opens com.anoman.machinehistory.service.product to javafx.fxml;
+    exports com.anoman.machinehistory.service.product;
+    opens com.anoman.machinehistory.service.repairmold to javafx.fxml;
+    exports com.anoman.machinehistory.service.repairmold;
 
     //controller
     opens com.anoman.machinehistory.controller to javafx.fxml;

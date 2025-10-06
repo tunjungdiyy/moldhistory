@@ -68,7 +68,7 @@ public class DialogProblemController {
         productMoldListView.setOnMouseClicked(event -> {
             ProductMold selected = productMoldListView.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                tfProductName.setText(selected.getProduct().getName() + "-" +selected.getId());
+                tfProductName.setText(selected.getProduct().getName() + "#" +selected.getId());
 
                 popupControl.hide();
 
@@ -141,7 +141,7 @@ public class DialogProblemController {
                 alertApp.showAlert("error", "Textfield Tidak Boleh Kosong ");
             } else {
 
-                String[] strings = tfProductName.getText().split("-");
+                String[] strings = tfProductName.getText().split("#");
                 ProductMold productMold = productMoldService.findById(strings[1]);
 
                 log.info(productMold.getId().toString(), getClass());
